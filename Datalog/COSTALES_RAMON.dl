@@ -1,0 +1,44 @@
+﻿%linea(Id_linea,Origen,Destino)
+linea(1,'Madrid','Londres').
+linea(2,'Londres','Washington').
+linea(3,'California','Sidney').
+linea(4,'Tokyo','Moscu').
+linea(5,'Lisboa','Madrid').
+linea(6,'Paris','Riga').
+linea(7,'Berlin','Moscu').
+linea(8,'Madrid','Jerusalen').
+linea(9,'Ontario','Chicago').
+linea(10,'Milan','Munich').
+
+%vuelo(Id_vuelo,Id_linea)
+vuelo(1,3).
+vuelo(2,3).
+vuelo(3,5).
+vuelo(4,7).
+vuelo(5,4).
+vuelo(6,2).
+vuelo(7,3).
+vuelo(8,5).
+vuelo(9,9).
+vuelo(10,7).
+
+%asiento(Id_asiento,Id_vuelo,Estado,Precio) ’Estado’ puede ser ’libre’ u ‘ocupado’
+asiento(1,1,'libre',299).
+asiento(2,2,'libre',455).
+asiento(3,1,'ocupado',299).
+asiento(4,5,'ocupado',100).
+asiento(3,5,'ocupado',300).
+asiento(1,7,'libre',200).
+asiento(24,1,'ocupado',199).
+asiento(2,1,'libre',234).
+asiento(2,14,'ocupado',205).
+asiento(6,10,'libre',325).
+
+asientovueloleft(P, L) :− lj(asiento(A,V1,'ocupado',P), vuelo(V2,L), V1 = V2).
+
+clientes_num_cuentas(L, precioConseguido) :− 
+	group_by( 
+		asientovueloleft(P, L), 
+		[L] , 
+		precioConseguido = sum (P) 
+	).
