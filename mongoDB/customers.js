@@ -1,4 +1,4 @@
-use COSTALES_RAMON
+use CUSTOMERS
 
 db.createCollection("Profiles")
 
